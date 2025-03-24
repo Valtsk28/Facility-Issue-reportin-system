@@ -1,0 +1,506 @@
+/* Keep existing CSS variables */
+:root {
+    --primary-color: #0056b3;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --light-gray: #f8f9fa;
+    --dark-gray: #343a40;
+    --outline-yellow: #FFDA00;
+    --outline-green: #43A01C;
+    --outline-pink: #FF7BAC;
+    --outline-blue: #3B5D96;
+}
+
+/* Keep existing reset and body styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--light-gray);
+}
+
+/* Keep existing password screen styles */
+.password-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.password-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.password-container img {
+    width: 150px;
+    margin-bottom: 1rem;
+}
+
+.password-container input {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 1rem 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.password-error {
+    color: var(--danger-color);
+    margin-bottom: 1rem;
+    min-height: 20px;
+}
+
+/* Keep existing container and header styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header img {
+    width: 200px;
+    margin-bottom: 1rem;
+}
+
+.header h1 {
+    color: var(--dark-gray);
+    font-size: 2rem;
+    line-height: 1.4;
+}
+
+/* Updated grid styles */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 2rem;
+}
+
+/* Updated box styles with color rotation */
+.box {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border: 3px solid transparent;
+}
+
+.box:nth-child(4n+1) {
+    border-color: var(--outline-yellow);
+}
+
+.box:nth-child(4n+2) {
+    border-color: var(--outline-green);
+}
+
+.box:nth-child(4n+3) {
+    border-color: var(--outline-pink);
+}
+
+.box:nth-child(4n+4) {
+    border-color: var(--outline-blue);
+}
+
+.box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Wide box styles */
+.wide-box {
+    grid-column: span 2;
+    background-color: white;
+    border-color: var(--outline-blue);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.wide-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.wide-box .category-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.wide-box h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+}
+
+
+/* Keep existing category icon styles */
+.category-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.box h3 {
+    margin-bottom: 0.5rem;
+    color: var(--dark-gray);
+}
+
+.box p {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+/* Keep existing modal styles */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+.survey {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 101;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+/* Keep existing form styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--dark-gray);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #004494;
+}
+
+/* Keep existing tutorial styles */
+.tutorial {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tutorial h3 {
+    color: var(--dark-gray);
+    margin-bottom: 1rem;
+}
+
+/* Admin password screen */
+#admin-password-screen .password-container {
+    max-width: 400px;
+}
+
+#admin-password-screen p {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+.tutorial p {
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+}
+
+/* Keep existing contact styles */
+.contact {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--dark-gray);
+}
+
+/* Keep existing media queries */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .contact {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+
+/* Reports page specific styles */
+.reports-page {
+    position: relative;
+    padding-top: 60px;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: var(--primary-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.back-button:hover {
+    color: #004494;
+}
+
+.reports-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 2rem;
+}
+
+/* Update report card styles */
+.report-card {
+    position: relative;
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    padding-bottom: 3rem; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border: 2px solid var(--outline-blue);
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.report-header h3 {
+    margin: 0;
+    color: var(--dark-gray);
+}
+
+.urgency-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.urgency-badge.low {
+    background-color: #e9ecef;
+    color: var(--secondary-color);
+}
+
+.urgency-badge.medium {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.urgency-badge.high {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.urgency-badge.critical {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.report-details {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.report-details p {
+    margin: 0.5rem 0;
+}
+
+.report-details strong {
+    color: var(--dark-gray);
+}
+
+@media (max-width: 768px) {
+    .reports-container {
+        grid-template-columns: 1fr;
+    }
+
+    .back-button {
+        position: static;
+        margin-bottom: 1rem;
+    }
+
+    .reports-page {
+        padding-top: 20px;
+    }
+}
+
+/* Add styles for no reports message */
+.no-reports-message {
+    text-align: center;
+    padding: 3rem;
+    background-color: white;
+    border-radius: 8px;
+    border: 2px dashed var(--outline-blue);
+    grid-column: 1 / -1;
+}
+
+.no-reports-message i {
+    font-size: 3rem;
+    color: var(--outline-blue);
+    margin-bottom: 1rem;
+}
+
+.no-reports-message p {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
+
+/* Update resolve button styles */
+.resolve-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: var(--success-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    padding: 0;
+}
+
+.resolve-btn:hover {
+    background-color: #218838;
+    transform: scale(1.1);
+}
+
+.resolve-btn i {
+    font-size: 1rem;
+}
+
+/* Add to the existing CSS */
+.report-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.report-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.report-image:hover {
+    transform: scale(1.05);
+}
+
+/* Update existing report header to remove the button from header */
+.report-actions {
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
