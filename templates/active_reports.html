@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Maintenance Reports - ISL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container reports-page">
+        <a href="/" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <div class="header">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRliHdpx5XPX_YiPhjJjsLwHXHDCdwYt7_rGQ&s" alt="ISL Logo">
+            <h1>Active Maintenance Reports</h1>
+        </div>
+
+        <div class="reports-container">
+            {% if reports %}
+                {% for report in reports %}
+                <div class="report-card" id="report-{{ loop.index0 }}">
+                    <div class="report-header">
+                        <h3>{{ report.category }}</h3>
+                        <div class="report-actions">
+                            <span class="urgency-badge {{ report.urgency }}">{{ report.urgency|title }}</span>
+                        </div>
+                    </div>
+                    <div class="report-details">
+                        <p><strong>Location:</strong> {{ report.location }}</p>
+                        <p><strong>Description:</strong> {{ report.description }}</p>
+                        <p><strong>Date Reported:</strong> {{ report.date }}</p>
+                        {% if report.images %}
+                        <div class="report-images">
+                            {% for image in report.images %}
+                            <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Report Image" class="report-image">
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <button class="resolve-btn" onclick="resolveIssue({{ loop.index0 }})">
+                        <i class="fas fa-check"></i>
+                    </button>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-reports-message">
+                    <i class="fas fa-clipboard-list"></i>
+                    <p>All active issues will appear here</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

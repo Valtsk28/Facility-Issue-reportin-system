@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISL Maintenance Reporting System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="password-screen" id="password-screen">
+        <div class="password-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRliHdpx5XPX_YiPhjJjsLwHXHDCdwYt7_rGQ&s" alt="ISL Logo">
+            <h2>ISL Maintenance Portal</h2>
+            <input type="password" id="password-input" placeholder="Enter password">
+            <p class="password-error" id="password-error"></p>
+            <button onclick="checkPassword('maintenance')">Enter</button>
+        </div>
+    </div>
+    
+    <div class="password-screen" id="admin-password-screen">
+        <div class="password-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRliHdpx5XPX_YiPhjJjsLwHXHDCdwYt7_rGQ&s" alt="ISL Logo">
+            <h2>Administrator Access</h2>
+            <p>Please enter the administrator password to view active reports</p>
+            <input type="password" id="admin-password-input" placeholder="Enter admin password">
+            <p class="password-error" id="admin-password-error"></p>
+            <button onclick="checkPassword('admin')">Access Reports</button>
+            <button class="cancel-btn" onclick="document.getElementById('admin-password-screen').style.display = 'none'">Cancel</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRliHdpx5XPX_YiPhjJjsLwHXHDCdwYt7_rGQ&s" alt="ISL Logo">
+            <h1>International School of Latvia<br>Maintenance Reporting</h1>
+        </div>
+
+        <div class="grid">
+            <div class="box" onclick="openSurvey('Classroom', event)">
+                <i class="fas fa-chalkboard-teacher category-icon"></i>
+                <h3>Classroom</h3>
+                <p>Desks, whiteboards, chairs, projectors</p>
+            </div>
+            <div class="box" onclick="openSurvey('Electrical and Lighting', event)">
+                <i class="fas fa-lightbulb category-icon"></i>
+                <h3>Electrical and Lighting</h3>
+                <p>Lightbulbs, wiring, sockets</p>
+            </div>
+            <div class="box" onclick="openSurvey('Heating and Cooling', event)">
+                <i class="fas fa-temperature-high category-icon"></i>
+                <h3>Heating and Cooling</h3>
+                <p>Air conditioning, radiators, ventilation</p>
+            </div>
+            <div class="box" onclick="openSurvey('Tech and Internet', event)">
+                <i class="fas fa-wifi category-icon"></i>
+                <h3>Tech and Internet</h3>
+                <p>Wi-Fi, computers, smartboards</p>
+            </div>
+            <div class="box" onclick="openSurvey('Hallway and Stairwell', event)">
+                <i class="fas fa-door-open category-icon"></i>
+                <h3>Hallway and Stairwell</h3>
+                <p>Doors, floors, handrails</p>
+            </div>
+            <div class="box" onclick="openSurvey('Cafeteria/Kitchen', event)">
+                <i class="fas fa-utensils category-icon"></i>
+                <h3>Cafeteria/Kitchen</h3>
+                <p>Ovens, sinks, tables</p>
+            </div>
+            <div class="box" onclick="openSurvey('Playground/Gym', event)">
+                <i class="fas fa-basketball-ball category-icon"></i>
+                <h3>Playground/Gym</h3>
+                <p>Sports equipment, swings, flooring</p>
+            </div>
+            <div class="box" onclick="openSurvey('Safety and Security', event)">
+                <i class="fas fa-shield-alt category-icon"></i>
+                <h3>Safety and Security</h3>
+                <p>Fire alarms, locks, cameras</p>
+            </div>
+            <div class="box" onclick="openSurvey('Power and Outdoor', event)">
+                <i class="fas fa-bolt category-icon"></i>
+                <h3>Power and Outdoor</h3>
+                <p>Generators, outdoor lighting</p>
+            </div>
+            <div class="box wide-box" onclick="viewActiveReports()">
+                <i class="fas fa-clipboard-list category-icon"></i>
+                <h3>View Active Reports</h3>
+                <p>See all currently reported maintenance issues</p>
+            </div>
+        </div>
+
+        <div id="modal-overlay" class="modal-overlay"></div>
+        <div id="survey" class="survey">
+            <span class="close-btn" onclick="closeSurvey()">&times;</span>
+            <h3>Report an Issue for <span id="surveyCategory"></span></h3>
+            <form id="reportForm" onsubmit="submitReport(event)">
+                <div class="form-group">
+                    <label>Location Details:</label>
+                    <input type="text" name="location" placeholder="e.g., Room 101, Main Hall" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Urgency Level:</label>
+                    <select name="urgency" required>
+                        <option value="">Select urgency level</option>
+                        <option value="low">Low - Can wait</option>
+                        <option value="medium">Medium - Needs attention soon</option>
+                        <option value="high">High - Urgent attention needed</option>
+                        <option value="critical">Critical - Immediate action required</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Describe the issue:</label>
+                    <textarea name="description" rows="4" placeholder="Please provide detailed description" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Images:</label>
+                    <input type="file" name="images" accept="image/*" multiple>
+                </div>
+
+                <button type="submit">Submit Report</button>
+            </form>
+        </div>
+
+        <div class="tutorial">
+            <h3>Quick Guide to Maintenance Reporting</h3>
+            <p>1. <strong>Identify the Issue:</strong> Select the appropriate category from the boxes above</p>
+            <p>2. <strong>Report Details:</strong> Fill in the form with specific details about the problem</p>
+            <p>3. <strong>Choose Department:</strong> Select which team should handle the issue</p>
+            <p>4. <strong>Submit:</strong> Click submit and our maintenance team will be notified immediately</p>
+            <p>5. <strong>Follow-up:</strong> Use the contact information below for any questions</p>
+        </div>
+
+        <div class="contact">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>maintenance@isl.edu.lv</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+371 67755146</span>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
